@@ -8,4 +8,4 @@ mpirun -np 16 IMB-MPI1 alltoall > alltoall.txt
 mpirun -np 16 IMB-MPI1 pingpong > pingpong.txt
 
 # make the graph
-python graph-two.py
+python graph.py
