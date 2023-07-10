@@ -19,7 +19,7 @@ mpirun -np 16 IMB-MPI1 pingpong > pingpong.txt
 cd
 
 # make the graph
-python graph.py
+python3 graph.py
 
 # copy the files back to the job directory if the env variables exist
 if [[ ! -z $jobnum ]];then
