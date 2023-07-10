@@ -1,0 +1,20 @@
+<tool id='User.Demo_say_hello' name='User.Demo_say_hello'>
+  <command interpreter='bash'>benchmark.sh</command>
+  <inputs>
+    <param 
+        name='command' 
+        label='Command to run' 
+        type='text' 
+        value='hostname' 
+        help='Type in the command to run on the remote resource' 
+    ></param>
+    <param 
+        name='resource_1' 
+        type='computeResource' 
+        label='Resource' 
+        help='Select a resource to run the command'
+    ></param>
+  </inputs>
+  <outputs>
+  </outputs>
+</tool>
