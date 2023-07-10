@@ -44,6 +44,7 @@ def process(input_file, output_file, processes):
     return [start_index, end_index]
 
 
+# TODO: save as html file so it can be viewed in browser
 def graph(csv, y):
     df = pd.read_csv(csv)
 
@@ -61,10 +62,10 @@ def graph(csv, y):
     plt.yscale("log")
     plt.xscale("log")
 
-    # Show & save the plot
+    # Convert to plotly figure
     fig = plt.gcf()
     plotly_fig = tls.mpl_to_plotly(fig)
-    py.iplot(plotly_fig)
+    py.plot(plotly_fig, filename="graph.html", auto_open=False)
 
 
 if __name__ == "__main__":
