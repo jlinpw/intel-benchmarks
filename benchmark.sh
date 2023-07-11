@@ -4,6 +4,24 @@
 # In this case: processors, resource_1_username, resource_1_publicIp
 source inputs.sh
 
+export job_number=$(basename ${PWD})
+export job_dir=$(pwd | rev | cut -d'/' -f1-2 | rev)
+echo "export job_number=${job_number}" >> inputs.sh
+
+# export the users env file (for some reason not all systems are getting these upon execution)
+while read LINE; do export "$LINE"; done < ~/.env 
+
+echo
+echo "JOB NUMBER:  ${job_number}"
+echo "USER:        ${PW_USER}"
+echo "DATE:        $(date)"
+echo "DIRECTORY:   ${PWD}"
+echo "COMMAND:     $0"
+# Very useful to rerun a workflow with the exact same code version!
+#commit_hash=$(git --git-dir=clone/.git log --pretty=format:'%h' -n 1)
+#echo "COMMIT HASH: ${commit_hash}"
+echo
+
 # env setup just in case
 source /etc/profile.d/lmod.sh
 source /home/ubuntu/spack/share/spack/setup-env.sh
