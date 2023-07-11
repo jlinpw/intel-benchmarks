@@ -45,7 +45,7 @@ def process(input_file, output_file, processes):
 
 
 # TODO: save as html file so it can be viewed in browser
-def graph(csv, y):
+def graph(csv, y, figname):
     df = pd.read_csv(csv)
 
     fig = plt.figure()
@@ -65,31 +65,29 @@ def graph(csv, y):
     # Convert to plotly figure
     fig = plt.gcf()
     plotly_fig = tls.mpl_to_plotly(fig)
-    py.plot(plotly_fig, filename="graph.html", auto_open=False)
+    py.plot(plotly_fig, filename=figname, auto_open=False)
+
+
+def plot_data(txt, csv, html, processes, y):
+    s, e = process(txt, csv, processes)
+    graph(csv, y, html)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        s, e = process("test_files/pingpong.txt", "test_files/pingpong.csv", 2)
-        # debug
-        # print(s, e)
-        # graph
-        graph("test_files/pingpong.csv", "Mbytes/sec")
-
-        t, f = process("test_files/alltoall.txt", "test_files/alltoall.csv", 4)
-        # debug
-        # print(t, f)
-        # graph
-        graph("test_files/alltoall.csv", "t_avg[usec]")
+    if len(sys.argv) > 2:
+        processes = sys.argv[2]
+        pingpong = "test_files/pingpong"
+        alltoall = "test_files/alltoall"
     else:
-        s, e = process("pingpong.txt", "pingpong.csv", 2)
-        # debug
-        # print(s, e)
-        # graph
-        graph("pingpong.csv", "Mbytes/sec")
+        processes = sys.argv[1]
+        pingpong = "pingpong"
+        alltoall = "alltoall"
 
-        t, f = process("alltoall.txt", "alltoall.csv", 4)
-        # debug
-        # print(t, f)
-        # graph
-        graph("alltoall.csv", "t_avg[usec]")
+    plot_data(pingpong + ".txt", pingpong + ".csv", pingpong + ".html", 2, "Mbytes/sec")
+    plot_data(
+        alltoall + ".txt",
+        alltoall + ".csv",
+        alltoall + ".html",
+        processes,
+        "t_avg[usec]",
+    )
