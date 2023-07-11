@@ -9,7 +9,7 @@ export job_dir=$(pwd | rev | cut -d'/' -f1-2 | rev)
 echo "export job_number=${job_number}" >> inputs.sh
 
 # export the users env file (for some reason not all systems are getting these upon execution)
-while read LINE; do export "$LINE"; done < ~/.env 
+while read LINE; do export "$LINE"; done < ~/.env
 
 echo
 echo "JOB NUMBER:  ${job_number}"
@@ -43,7 +43,7 @@ mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt
 cd
 
 # make the graph
-python3 graph.py ${processors}
+python3 ${PWD}/graph.py ${processors}
 
 # copy the files back to the job directory if the env variables exist
 if [[ ! -z $jobnum ]];then
