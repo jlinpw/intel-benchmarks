@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source inputs.sh
+
 # env setup just in case
 source /etc/profile.d/lmod.sh
 source /home/ubuntu/spack/share/spack/setup-env.sh
