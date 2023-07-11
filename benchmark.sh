@@ -39,9 +39,6 @@ module load intel-oneapi-compilers/2023.1.0-u3hp4we intel-oneapi-mpi/2021.9.0-hn
 mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt
 mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt
 
-# go to home
-cd
-
 # make the graph
 python3 ${PWD}/graph.py ${processors}
 
