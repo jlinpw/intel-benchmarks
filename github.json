@@ -3,5 +3,11 @@
     "branch": "main",
     "xml": "workflow.xml",
     "thumbnail": "thumbnail.png",
-    "readme": "README.md"
+    "readme": "README.md",
+    "sparsecheckout": [
+      "benchmark.sh",
+      "clean.sh",
+      "graph.py",
+      "requirements.txt"
+    ]
   }
