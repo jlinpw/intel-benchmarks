@@ -6,6 +6,7 @@ source /home/ubuntu/spack/share/spack/setup-env.sh
 #export MODULEPATH=$MODULEPATH:/home/ubuntu/spack/share/spack/lmod/linux-ubuntu22.04-x86_64/Core
 module use /home/ubuntu/spack/share/spack/lmod/linux-ubuntu22.04-x86_64/Core
 # install dependencies
+pip install --upgrade pip
 pip install -r requirements.txt
 
 # load the modules
@@ -19,7 +20,9 @@ mpirun -np 16 IMB-MPI1 pingpong > pingpong.txt
 # go to home
 cd
 
-echo $@
+echo "INPUT ARGUMENTS:"
+echo ${processors}
+echo ${resource_1}
 
 # make the graph
 python3 graph.py
