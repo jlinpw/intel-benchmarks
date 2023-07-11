@@ -24,7 +24,7 @@ cd
 
 echo "INPUT ARGUMENTS:"
 echo ${processors}
-echo ${resource_1}
+echo ${resource_1_name}
 
 # make the graph
 python3 graph.py
