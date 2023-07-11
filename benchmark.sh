@@ -29,6 +29,7 @@ source /home/ubuntu/spack/share/spack/setup-env.sh
 module use /home/ubuntu/spack/share/spack/lmod/linux-ubuntu22.04-x86_64/Core
 
 # install dependencies
+yum update python3
 pip install --upgrade pip
 pip install -r requirements.txt
 
