@@ -1,3 +1,3 @@
 # Intel Benchmarks
 
-Simple script to generate IMB-MPI1 results for a medium instance Intel node, then graph them. 
+Simple workflow to generate IMB-MPI1 alltoall and pingpong results for a medium instance Intel node, then graph them using plotly.
