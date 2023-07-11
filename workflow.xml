@@ -2,11 +2,11 @@
   <command interpreter='bash'>benchmark.sh</command>
   <inputs>
     <param 
-        name='command' 
-        label='Command to run' 
+        name='processors' 
+        label='Number of processors' 
         type='text' 
-        value='hostname' 
-        help='Type in the command to run on the remote resource' 
+        value='2' 
+        help='Type in the number of processors there are on the node' 
     ></param>
     <param 
         name='resource_1' 
