@@ -18,6 +18,6 @@ git clone -c feature.manyFiles=true https://github.com/spack/spack.git
 spack install intel-oneapi-mpi intel-oneapi-compilers
 source /usr/share/lmod/8.7.7/init/bash
 yes | spack module lmod refresh intel-oneapi-mpi intel-oneapi-compilers
-module avail
 export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/linux-centos7-x86_64
+module avail
 EOF
