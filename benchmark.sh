@@ -22,6 +22,8 @@ echo "COMMAND:     $0"
 #echo "COMMIT HASH: ${commit_hash}"
 echo
 
+./setup.sh
+
 # env setup just in case
 source /etc/profile.d/lmod.sh
 source /home/ubuntu/spack/share/spack/setup-env.sh
