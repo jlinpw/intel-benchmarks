@@ -16,7 +16,7 @@ ssh ${PW_USER}@${remote_node} << EOF
 git clone ${code_repo}
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git
 . $HOME/spack/share/spack/setup-env.sh
-spack install intel-one-api-mpi intel-one-api-compilers
+spack install intel-oneapi-mpi intel-oneapi-compilers
 source/user/share/lmod/8.7.7/init/bash
 spack module lmod refresh intel-one-api-mpi intel-oneapi-compilers
 export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/linux-centos7-x86_64
