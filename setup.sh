@@ -1,6 +1,8 @@
 #!/bin/bash
 
-remote_node=${WFP_whost}
+source inputs.sh
+
+remote_node=${resource_1_publicIp}
 code_repo=https://github.com/jlinpw/intel-benchmarks
 abs_path_to_code_repo="/home/${PW_USER}/$(basename $code_repo)"
 
