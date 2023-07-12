@@ -4,6 +4,11 @@ remote_node=${WFP_whost}
 code_repo=https://github.com/jlinpw/intel-benchmarks
 abs_path_to_code_repo="/home/${PW_USER}/$(basename $code_repo)"
 
+echo
+echo "REMOTE NODE:  ${remote_node}"
+echo "USER:         ${PW_USER}"
+echo
+
 # log into the cluster & clone the repository
 ssh ${PW_USER}@${remote_node} << EOF
 git clone ${code_repo}
