@@ -32,8 +32,8 @@ module use /home/ubuntu/spack/share/spack/lmod/linux-ubuntu22.04-x86_64/Core
 
 # install dependencies
 # sudo yum update python3
-pip install --upgrade pip
-pip install -r requirements.txt
+ssh ${PW_USER}@${remote_node} "pip install --upgrade pip"
+ssh ${PW_USER}@${remote_node} "pip install -r requirements.txt"
 
 # load the modules
 module load intel-oneapi-compilers/2023.1.0-u3hp4we intel-oneapi-mpi/2021.9.0-hnwuxap
