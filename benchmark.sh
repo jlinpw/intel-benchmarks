@@ -59,10 +59,11 @@ echo "Setting up environment and loading modules:"
 echo $intel_compilers
 
 module load $intel_compilers
+module list
 
 # run the benchmark test and pipe the output into a file
-ssh ${PW_USER}@${remote_node} "mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt"
-ssh ${PW_USER}@${remote_node} "mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt"
+mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt
+mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt
 EOF
 
 # make the graph
