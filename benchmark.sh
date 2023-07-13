@@ -69,10 +69,10 @@ echo "Creating graphs..."
 ssh ${PW_USER}@${remote_node} "python3 ${abs_path_to_code_repo}/graph.py ${processors}"
 
 # copy the files back to the job directory if the env variables exist
-if [[ ! -z $jobnum ]];then
-    echo JOBNUM: $jobnum
-    echo JOBDIR: $jobdir
-    ssh usercontainer mkdir $jobdir/results
+if [[ ! -z $job_number ]];then
+    echo JOBNUM: $job_number
+    echo JOBDIR: $job_dir
+    ssh usercontainer mkdir $job_dir/results
     
     cat << EOF > service.html
 <body style="background:white;">
@@ -81,7 +81,7 @@ if [[ ! -z $jobnum ]];then
 </body>
 EOF
     
-    scp *.csv *.txt *.html service.html usercontainer:$jobdir/results && ./clean.sh
+    scp *.csv *.txt *.html service.html usercontainer:$job_dir/results && ./clean.sh
     
 fi
 
