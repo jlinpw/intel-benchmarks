@@ -78,8 +78,8 @@ ssh ${PW_USER}@${remote_node} "python3 ${abs_path_to_code_repo}/graph.py ${proce
 if [[ ! -z $job_number ]];then
     echo "Copying results back to job directory..."
     echo JOBNUM: $job_number
-    echo JOBDIR: $job_dir
-    mkdir $HOME/pw/jobs/$job_dir/results
+    echo JOBDIR: ${PWD}
+    mkdir ${PWD}/results
     
     #     cat << EOF > service.html
     # <body style="background:white;">
@@ -89,7 +89,7 @@ if [[ ! -z $job_number ]];then
     # EOF
     
     # scp *.csv *.txt *.html $HOME/pw/jobs:$job_dir/results && ./clean.sh
-    scp ${PW_USER}@${remote_node}:*.csv ${PW_USER}@${remote_node}:*.txt ${PW_USER}@${remote_node}:*.html $HOME/pw/jobs/$job_dir/results && ./clean.sh
+    scp ${PW_USER}@${remote_node}:*.csv ${PW_USER}@${remote_node}:*.txt ${PW_USER}@${remote_node}:*.html ${PWD}/results && ./clean.sh
     # scp remote_username@remote_host:/remote/file.txt local_directory/
     
     
