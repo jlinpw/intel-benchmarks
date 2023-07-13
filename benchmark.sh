@@ -4,12 +4,17 @@
 # In this case: processors, resource_1_username, resource_1_publicIp
 source inputs.sh
 
+# save the job number & job directory
 export job_number=$(basename ${PWD})
 export job_dir=$(pwd | rev | cut -d'/' -f1-2 | rev)
 export remote_node=${resource_1_publicIp}
+
+# get the correct repo & paths
+export code_repo=https://github.com/jlinpw/intel-benchmarks
+export abs_path_to_code_repo="/home/${PW_USER}/$(basename $code_repo)"
 echo "export job_number=${job_number}" >> inputs.sh
 
-# export the users env file 
+# export the users env file
 while read LINE; do export "$LINE"; done < ~/.env
 
 # echo some useful information
@@ -25,25 +30,38 @@ echo
 ./setup.sh
 
 # env setup just in case
-source /etc/profile.d/lmod.sh
-source /home/ubuntu/spack/share/spack/setup-env.sh
-#export MODULEPATH=$MODULEPATH:/home/ubuntu/spack/share/spack/lmod/linux-ubuntu22.04-x86_64/Core
-module use /home/ubuntu/spack/share/spack/lmod/linux-ubuntu22.04-x86_64/Core
+# source /etc/profile.d/lmod.sh
+# source /home/ubuntu/spack/share/spack/setup-env.sh
+# #export MODULEPATH=$MODULEPATH:/home/ubuntu/spack/share/spack/lmod/linux-ubuntu22.04-x86_64/Core
+# module use /home/ubuntu/spack/share/spack/lmod/linux-ubuntu22.04-x86_64/Core
 
 # install dependencies
 # sudo yum update python3
+export requirements="${abs_path_to_code_repo}/requirements.txt"
 ssh ${PW_USER}@${remote_node} "pip install --upgrade pip"
-ssh ${PW_USER}@${remote_node} "pip install -r requirements.txt"
+ssh ${PW_USER}@${remote_node} "pip install -r $requirements"
 
 # load the modules
-module load intel-oneapi-compilers/2023.1.0-u3hp4we intel-oneapi-mpi/2021.9.0-hnwuxap
+# module load intel-oneapi-compilers/2023.1.0-u3hp4we intel-oneapi-mpi/2021.9.0-hnwuxap
+
+# find the correct modules
+intel_compilers=$(module avail 2>&1 | grep -o "intel-oneapi-compilers/[^[:space:]]*")
+intel_mpi=$(module avail 2>&1 | grep -o "intel-oneapi-mpi/[^[:space:]]*")
+
+# set up env & load the modules
+ssh ${PW_USER}@${remote_node} << EOF
+. $HOME/spack/share/spack/setup-env.sh
+source /usr/share/lmod/8.7.7/init/bash
+module load $intel_compilers
+module load $intel_mpi
+EOF
 
 # run the benchmark test and pipe the output into a file
 ssh ${PW_USER}@${remote_node} "mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt"
 ssh ${PW_USER}@${remote_node} "mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt"
 
 # make the graph
-ssh ${PW_USER}@${remote_node} "python3 ${PWD}/graph.py ${processors}"
+ssh ${PW_USER}@${remote_node} "python3 ${abs_path_to_code_repo}/graph.py ${processors}"
 
 # copy the files back to the job directory if the env variables exist
 if [[ ! -z $jobnum ]];then
