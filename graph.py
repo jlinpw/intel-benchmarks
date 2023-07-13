@@ -83,7 +83,6 @@ if __name__ == "__main__":
         pingpong = "pingpong"
         alltoall = "alltoall"
 
-    plot_data(pingpong + ".txt", pingpong + ".csv", pingpong + ".html", 2, "Mbytes/sec")
     plot_data(
         alltoall + ".txt",
         alltoall + ".csv",
@@ -91,3 +90,4 @@ if __name__ == "__main__":
         processes,
         "t_avg[usec]",
     )
+    plot_data(pingpong + ".txt", pingpong + ".csv", pingpong + ".html", 2, "Mbytes/sec")
