@@ -51,20 +51,22 @@ source /usr/share/lmod/8.7.7/init/bash
 export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/linux-centos7-x86_64
 
 module avail
-module avail 2>&1 | grep "intel-oneapi-compilers"
 
 # find the correct modules
 export intel_compilers=$(module avail 2>&1 | grep "intel-oneapi-compilers")
 
 echo "Setting up environment and loading modules:"
+echo $(module avail 2>&1 | grep "intel-oneapi-compilers")
+echo $(module avail 2>&1 | grep "intel-oneapi-mpi")
 echo $intel_compilers
 
-module load Core/intel-oneapi-compilers/2023.1.0-6pj3at3 Core/intel-oneapi-mpi/2021.9.0-b7lm3bc
 module load $intel_compilers
 module list
 
 # run the benchmark test and pipe the output into a file
+echo "Running alltoall:"
 mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt
+echo "Running pingpong:"
 mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt
 EOF
 
