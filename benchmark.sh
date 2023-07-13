@@ -36,7 +36,6 @@ echo
 # module use /home/ubuntu/spack/share/spack/lmod/linux-ubuntu22.04-x86_64/Core
 
 # install dependencies
-# sudo yum update python3
 export requirements="${abs_path_to_code_repo}/requirements.txt"
 ssh ${PW_USER}@${remote_node} "pip install --upgrade pip"
 ssh ${PW_USER}@${remote_node} "pip install -r $requirements"
@@ -52,14 +51,6 @@ export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/linux-centos7-x86_64
 
 module avail
 
-# find the correct modules
-# export intel_compilers=$(module avail 2>&1 | grep "intel-oneapi-compilers")
-
-# echo "Setting up environment and loading modules:"
-# echo $(module avail 2>&1 | grep "intel-oneapi-mpi")
-# echo $intel_compilers
-
-# module load $intel_compilers
 source ${abs_path_to_code_repo}/modules.sh
 module list
 
@@ -86,7 +77,7 @@ if [[ ! -z $jobnum ]];then
 </body>
 EOF
     
-    scp *.csv *.txt *.png service.html usercontainer:$jobdir/results && ./clean.sh
+    scp *.csv *.txt *.html service.html usercontainer:$jobdir/results && ./clean.sh
     
 fi
 
