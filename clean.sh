@@ -1,3 +1,7 @@
 #!/bin/bash
 
-rm *.csv *.png *.txt job.exit service.html
+source inputs.sh
+
+cd 
+cd $HOME/pw/clusters/${resource_1_name}
+rm *.csv *.txt *.html
