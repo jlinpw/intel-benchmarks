@@ -49,6 +49,9 @@ ssh ${PW_USER}@${remote_node} << EOF
 . $HOME/spack/share/spack/setup-env.sh
 source /usr/share/lmod/8.7.7/init/bash
 export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/linux-centos7-x86_64
+
+module avail 
+
 # find the correct modules
 export intel_compilers=$(module avail 2>&1 | grep -o "Core/intel-oneapi-compilers/[^[:space:]]*")
 export intel_mpi=$(module avail 2>&1 | grep -o "Core/intel-oneapi-compilers/[^[:space:]]*")
