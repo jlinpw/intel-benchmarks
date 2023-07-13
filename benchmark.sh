@@ -55,8 +55,10 @@ source ${abs_path_to_code_repo}/modules.sh
 module list
 
 # run the benchmark tests and pipe the output into a file
-# echo "Running alltoall..."
-# mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt
+echo "Running alltoall..."
+mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt
+echo "Alltoall completed!"
+echo
 
 echo "Running pingpong..."
 mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt
