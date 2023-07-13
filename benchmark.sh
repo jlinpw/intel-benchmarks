@@ -60,7 +60,7 @@ module avail
 # echo $intel_compilers
 
 # module load $intel_compilers
-source modules.sh
+source ${abs_path_to_code_repo}/modules.sh
 module list
 
 # run the benchmark test and pipe the output into a file
