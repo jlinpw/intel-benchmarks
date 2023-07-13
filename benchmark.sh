@@ -48,6 +48,9 @@ ssh ${PW_USER}@${remote_node} "pip install -r $requirements"
 intel_compilers=$(module avail 2>&1 | grep -o "intel-oneapi-compilers/[^[:space:]]*")
 intel_mpi=$(module avail 2>&1 | grep -o "intel-oneapi-mpi/[^[:space:]]*")
 
+echo "Setting up environment and loading modules:"
+echo $intel_compilers
+echo $intel_mpi
 # set up env & load the modules
 ssh ${PW_USER}@${remote_node} << EOF
 . $HOME/spack/share/spack/setup-env.sh
