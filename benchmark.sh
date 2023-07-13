@@ -54,14 +54,16 @@ module avail
 source ${abs_path_to_code_repo}/modules.sh
 module list
 
-# run the benchmark test and pipe the output into a file
-echo "Running alltoall:"
-mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt
-echo "Running pingpong:"
+# run the benchmark tests and pipe the output into a file
+# echo "Running alltoall..."
+# mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt
+
+echo "Running pingpong..."
 mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt
 EOF
 
 # make the graph
+echo "Creating graphs..."
 ssh ${PW_USER}@${remote_node} "python3 ${abs_path_to_code_repo}/graph.py ${processors}"
 
 # copy the files back to the job directory if the env variables exist
