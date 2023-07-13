@@ -50,23 +50,20 @@ ssh ${PW_USER}@${remote_node} << EOF
 source /usr/share/lmod/8.7.7/init/bash
 export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/linux-centos7-x86_64
 
-module avail 
+module avail
 
 # find the correct modules
 export intel_compilers=$(module avail 2>&1 | grep "intel-oneapi-compilers")
-export intel_mpi=$(module avail 2>&1 | grep "intel-oneapi-mpi")
 
 echo "Setting up environment and loading modules:"
-echo ${intel_compilers}
-echo ${intel_mpi}
+echo $intel_compilers
 
 module load $intel_compilers
-module load $intel_mpi
-EOF
 
 # run the benchmark test and pipe the output into a file
 ssh ${PW_USER}@${remote_node} "mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt"
 ssh ${PW_USER}@${remote_node} "mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt"
+EOF
 
 # make the graph
 ssh ${PW_USER}@${remote_node} "python3 ${abs_path_to_code_repo}/graph.py ${processors}"
