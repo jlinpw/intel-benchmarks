@@ -56,14 +56,16 @@ module list
 
 # run the benchmark tests and pipe the output into a file
 echo "Running alltoall..."
-mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt
-wait 
+mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt &
+pid=$!
+wait $pid
 echo "Alltoall completed!"
 echo
 
 echo "Running pingpong..."
-mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt
-wait
+mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt &
+pid2=$!
+wait $pid2
 echo "Pingpong completed!"
 echo
 EOF
@@ -77,16 +79,16 @@ if [[ ! -z $job_number ]];then
     echo "Copying results back to job directory..."
     echo JOBNUM: $job_number
     echo JOBDIR: $job_dir
-    mkdir $job_dir/results
+    mkdir $HOME/pw/jobs/$job_dir/results
     
     cat << EOF > service.html
 <body style="background:white;">
-<img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display$job_dir/results/alltoall.html">
-<img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display$job_dir/results/pingpong.html">
+<img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/alltoall.html">
+<img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/pingpong.html">
 </body>
 EOF
     
-    scp *.csv *.txt *.html service.html usercontainer:$job_dir/results && ./clean.sh
+    scp *.csv *.txt *.html service.html $HOME/pw/jobs:$job_dir/results && ./clean.sh
     
 fi
 
