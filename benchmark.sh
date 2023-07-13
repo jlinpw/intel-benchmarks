@@ -52,15 +52,15 @@ export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/linux-centos7-x86_64
 
 module avail
 
-# # find the correct modules
-# export intel_compilers=$(module avail 2>&1 | grep "intel-oneapi-compilers")
+# find the correct modules
+export intel_compilers=$(module avail 2>&1 | grep "intel-oneapi-compilers")
 
-# echo "Setting up environment and loading modules:"
-# echo $(module avail 2>&1 | grep "intel-oneapi-mpi")
-# echo $intel_compilers
+echo "Setting up environment and loading modules:"
+echo $(module avail 2>&1 | grep "intel-oneapi-mpi")
+echo $intel_compilers
 
-# module load $intel_compilers
-source ${abs_path_to_code_repo}/modules.sh
+module load $intel_compilers
+#source ${abs_path_to_code_repo}/modules.sh
 module list
 
 # run the benchmark test and pipe the output into a file
