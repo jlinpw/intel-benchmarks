@@ -45,8 +45,8 @@ ssh ${PW_USER}@${remote_node} "pip install -r $requirements"
 # module load intel-oneapi-compilers/2023.1.0-u3hp4we intel-oneapi-mpi/2021.9.0-hnwuxap
 
 # find the correct modules
-intel_compilers=$(module avail 2>&1 | grep -o "intel-oneapi-compilers/[^[:space:]]*")
-intel_mpi=$(module avail 2>&1 | grep -o "intel-oneapi-mpi/[^[:space:]]*")
+intel_compilers=$(module avail 2>&1 | grep -o "[[:space:]]*/intel-oneapi-compilers/[^[:space:]]*")
+intel_mpi=$(module avail 2>&1 | grep -o "[[:space:]]*/intel-oneapi-compilers/[^[:space:]]*")
 
 echo "Setting up environment and loading modules:"
 echo $intel_compilers
