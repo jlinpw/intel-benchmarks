@@ -6,23 +6,22 @@ source inputs.sh
 
 export job_number=$(basename ${PWD})
 export job_dir=$(pwd | rev | cut -d'/' -f1-2 | rev)
-remote_node=${resource_1_publicIp}
+export remote_node=${resource_1_publicIp}
 echo "export job_number=${job_number}" >> inputs.sh
 
-# export the users env file (for some reason not all systems are getting these upon execution)
+# export the users env file 
 while read LINE; do export "$LINE"; done < ~/.env
 
+# echo some useful information
 echo
 echo "JOB NUMBER:  ${job_number}"
 echo "USER:        ${PW_USER}"
 echo "DATE:        $(date)"
 echo "DIRECTORY:   ${PWD}"
 echo "COMMAND:     $0"
-# Very useful to rerun a workflow with the exact same code version!
-#commit_hash=$(git --git-dir=clone/.git log --pretty=format:'%h' -n 1)
-#echo "COMMIT HASH: ${commit_hash}"
 echo
 
+# set up spack & mpi
 ./setup.sh
 
 # env setup just in case
@@ -40,11 +39,11 @@ ssh ${PW_USER}@${remote_node} "pip install -r requirements.txt"
 module load intel-oneapi-compilers/2023.1.0-u3hp4we intel-oneapi-mpi/2021.9.0-hnwuxap
 
 # run the benchmark test and pipe the output into a file
-mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt
-mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt
+ssh ${PW_USER}@${remote_node} "mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt"
+ssh ${PW_USER}@${remote_node} "mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt"
 
 # make the graph
-python3 ${PWD}/graph.py ${processors}
+ssh ${PW_USER}@${remote_node} "python3 ${PWD}/graph.py ${processors}"
 
 # copy the files back to the job directory if the env variables exist
 if [[ ! -z $jobnum ]];then
