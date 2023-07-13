@@ -57,11 +57,15 @@ module list
 # run the benchmark tests and pipe the output into a file
 echo "Running alltoall..."
 mpirun -np ${processors} IMB-MPI1 alltoall > alltoall.txt
+wait 
 echo "Alltoall completed!"
 echo
 
 echo "Running pingpong..."
 mpirun -np ${processors} IMB-MPI1 pingpong > pingpong.txt
+wait
+echo "Pingpong completed!"
+echo
 EOF
 
 # make the graph
@@ -70,14 +74,15 @@ ssh ${PW_USER}@${remote_node} "python3 ${abs_path_to_code_repo}/graph.py ${proce
 
 # copy the files back to the job directory if the env variables exist
 if [[ ! -z $job_number ]];then
+    echo "Copying results back to job directory..."
     echo JOBNUM: $job_number
     echo JOBDIR: $job_dir
-    ssh usercontainer mkdir $job_dir/results
+    mkdir $job_dir/results
     
     cat << EOF > service.html
 <body style="background:white;">
-<img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display$jobdir/results/alltoall.html">
-<img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display$jobdir/results/pingpong.html">
+<img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display$job_dir/results/alltoall.html">
+<img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display$job_dir/results/pingpong.html">
 </body>
 EOF
     
