@@ -8,6 +8,7 @@
       "benchmark.sh",
       "clean.sh",
       "graph.py",
-      "requirements.txt"
+      "requirements.txt",
+      "modules.sh"
     ]
   }
