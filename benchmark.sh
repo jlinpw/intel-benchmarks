@@ -59,6 +59,7 @@ export intel_compilers=$(module avail 2>&1 | grep "intel-oneapi-compilers")
 echo "Setting up environment and loading modules:"
 echo $intel_compilers
 
+module load Core/intel-oneapi-compilers/2023.1.0-6pj3at3 Core/intel-oneapi-mpi/2021.9.0-b7lm3bc
 module load $intel_compilers
 module list
 
