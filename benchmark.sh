@@ -56,7 +56,7 @@ module avail
 export intel_compilers=$(module avail 2>&1 | grep "intel-oneapi-compilers")
 
 echo "Setting up environment and loading modules:"
-echo $(module avail 2>&1 | grep "intel-oneapi-compilers")
+modules=$(module avail | grep "intel-oneapi-compilers")
 echo $(module avail 2>&1 | grep "intel-oneapi-mpi")
 echo $intel_compilers
 
