@@ -27,7 +27,8 @@ echo "COMMAND:     $0"
 echo
 
 # set up spack & mpi
-ssh ${PW_USER}@${remote_node} 'bash -s' < ${${abs_path_to_code_repo}/setup.sh}
+setup_sh=${abs_path_to_code_repo}/setup.sh
+ssh ${PW_USER}@${remote_node} 'bash -s' < ${setup_sh}
 
 # env setup just in case
 # source /etc/profile.d/lmod.sh
