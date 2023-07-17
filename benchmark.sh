@@ -28,7 +28,7 @@ echo
 
 # set up spack & mpi
 #setup_sh=${abs_path_to_code_repo}/setup.sh
-ssh ${PW_USER}@${remote_node} 'bash -s' < ${setup.sh}
+ssh ${PW_USER}@${remote_node} 'bash -s' < setup.sh
 
 # env setup just in case
 # source /etc/profile.d/lmod.sh
