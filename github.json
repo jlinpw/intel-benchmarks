@@ -9,6 +9,7 @@
       "clean.sh",
       "graph.py",
       "requirements.txt",
-      "modules.sh"
+      "modules.sh",
+      "setup.sh"
     ]
   }
