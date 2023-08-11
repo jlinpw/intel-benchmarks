@@ -1,9 +1,6 @@
 #!/bin/bash
 
 code_repo=https://github.com/jlinpw/intel-benchmarks
-# abs_path_to_code_repo="/home/${PW_USER}/$(basename $code_repo)"
-# intel_compilers=$(module avail 2>&1 | grep -o "Core/intel-oneapi-compilers/[^[:space:]]*")
-# intel_mpi=$(module avail 2>&1 | grep -o "Core/intel-oneapi-mpi/[^[:space:]]*")
 
 # clone the repository, download spack, setup modules
 git clone ${code_repo}
