@@ -1,6 +1,6 @@
 #!/bin/bash
 
-code_repo=https://github.com/jlinpw/intel-benchmarks
+code_repo=https://github.com/parallelworks/intel-benchmarks
 
 # clone the repository, download spack, setup modules
 git clone ${code_repo}

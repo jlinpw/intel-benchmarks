@@ -1,5 +1,5 @@
 {
-    "repo": "https://github.com/jlinpw/intel-benchmarks.git",
+    "repo": "https://github.com/parallelworks/intel-benchmarks.git",
     "branch": "main",
     "xml": "workflow.xml",
     "thumbnail": "thumbnail.png",
