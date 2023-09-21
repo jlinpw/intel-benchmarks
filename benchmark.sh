@@ -50,7 +50,8 @@ ssh ${remote_node} "pip install -r $requirements"
 ssh ${remote_node} << EOF
 . $HOME/spack/share/spack/setup-env.sh
 source /usr/share/lmod/8.7.7/init/bash
-export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/linux-centos7-x86_64
+MODULE_DIR=$(basename $HOME/spack/share/spack/lmod/linux*)
+export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/${MODULE_DIR}
 
 module avail
 
