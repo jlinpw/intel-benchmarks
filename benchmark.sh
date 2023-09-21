@@ -4,6 +4,10 @@
 # In this case: processors, resource_1_username, resource_1_publicIp
 source inputs.sh
 
+if [ ! -d /home/${PW_USER} ]; then
+  export PW_USER=ubuntu
+fi
+
 # save the job number & job directory
 export job_number=$(basename ${PWD})
 export job_dir=$(pwd | rev | cut -d'/' -f1-2 | rev)
@@ -11,8 +15,7 @@ export remote_node=${resource_1_publicIp}
 
 # get the correct repo & paths
 export code_repo=https://github.com/parallelworks/intel-benchmarks
-#export abs_path_to_code_repo="/home/${PW_USER}/$(basename $code_repo)"
-export abs_path_to_code_repo="$(basename $code_repo)"
+export abs_path_to_code_repo="/home/${PW_USER}/$(basename $code_repo)"
 echo "export job_number=${job_number}" >> inputs.sh
 
 # export the users env file
