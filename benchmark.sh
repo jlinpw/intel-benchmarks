@@ -30,7 +30,7 @@ echo "USER:         ${PW_USER}"
 echo
 
 # set up spack & mpi
-ssh ubuntu@${remote_node} 'bash -s' < setup.sh
+ssh ${remote_node} 'bash -s' < setup.sh
 
 # env setup just in case
 # source /etc/profile.d/lmod.sh
@@ -40,14 +40,14 @@ ssh ubuntu@${remote_node} 'bash -s' < setup.sh
 
 # install dependencies
 export requirements="${abs_path_to_code_repo}/requirements.txt"
-ssh ubuntu@${remote_node} "pip install --upgrade pip"
-ssh ubuntu@${remote_node} "pip install -r $requirements"
+ssh ${remote_node} "pip install --upgrade pip"
+ssh ${remote_node} "pip install -r $requirements"
 
 # load the modules
 # module load intel-oneapi-compilers/2023.1.0-u3hp4we intel-oneapi-mpi/2021.9.0-hnwuxap
 
 # set up env & load the modules - must be done at once so the correct modules are loaded
-ssh ubuntu@${remote_node} << EOF
+ssh ${remote_node} << EOF
 . $HOME/spack/share/spack/setup-env.sh
 source /usr/share/lmod/8.7.7/init/bash
 export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/linux-centos7-x86_64
@@ -75,7 +75,7 @@ EOF
 
 # make the graph
 echo "Creating graphs..."
-ssh ubuntu@${remote_node} "python3 ${abs_path_to_code_repo}/graph.py ${processors}"
+ssh ${remote_node} "python3 ${abs_path_to_code_repo}/graph.py ${processors}"
 
 # copy the files back to the job directory if the env variables exist
 if [[ ! -z $job_number ]];then
@@ -92,7 +92,7 @@ if [[ ! -z $job_number ]];then
     # EOF
     
     # scp *.csv *.txt *.html $HOME/pw/jobs:$job_dir/results && ./clean.sh
-    scp ubuntu@${remote_node}:*.csv ubuntu@${remote_node}:*.txt ubuntu@${remote_node}:*.html ${PWD}/results && ./clean.sh
+    scp ${remote_node}:*.csv ${remote_node}:*.txt ${remote_node}:*.html ${PWD}/results && ./clean.sh
     # scp remote_username@remote_host:/remote/file.txt local_directory/
     
 fi
