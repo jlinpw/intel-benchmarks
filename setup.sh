@@ -1,9 +1,10 @@
 #!/bin/bash
 
 code_repo=https://github.com/parallelworks/intel-benchmarks
+branch=migrate_repo_paths
 
 # clone the repository, download spack, setup modules
-git clone ${code_repo}
+git clone --branch ${branch} ${code_repo}
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git
 . $HOME/spack/share/spack/setup-env.sh
 spack install intel-oneapi-mpi intel-oneapi-compilers
