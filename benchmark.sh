@@ -39,8 +39,8 @@ ssh ${remote_node} 'bash -s' < setup.sh
 # module use /home/ubuntu/spack/share/spack/lmod/linux-ubuntu22.04-x86_64/Core
 
 # install dependencies
-#export requirements="${abs_path_to_code_repo}/requirements.txt"
-export requirements="${job_dir}/requirements.txt"
+export requirements="${abs_path_to_code_repo}/requirements.txt"
+#export requirements="${job_dir}/requirements.txt"
 ssh ${remote_node} "pip install --upgrade pip"
 ssh ${remote_node} "pip install -r $requirements"
 
