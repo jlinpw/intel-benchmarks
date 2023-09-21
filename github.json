@@ -1,6 +1,6 @@
 {
-    "repo": "https://github.com/jlinpw/intel-benchmarks.git",
-    "branch": "main",
+    "repo": "https://github.com/parallelworks/intel-benchmarks.git",
+    "branch": "inteldemo",
     "xml": "workflow.xml",
     "thumbnail": "thumbnail.png",
     "readme": "README.md",
