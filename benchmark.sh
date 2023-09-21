@@ -47,7 +47,7 @@ ssh ${remote_node} "pip install -r $requirements"
 # module load intel-oneapi-compilers/2023.1.0-u3hp4we intel-oneapi-mpi/2021.9.0-hnwuxap
 
 # set up env & load the modules - must be done at once so the correct modules are loaded
-ssh @${remote_node} << EOF
+ssh ${remote_node} << EOF
 . $HOME/spack/share/spack/setup-env.sh
 source /usr/share/lmod/8.7.7/init/bash
 export MODULEPATH=$MODULEPATH:$HOME/spack/share/spack/lmod/linux-centos7-x86_64
