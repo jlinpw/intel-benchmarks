@@ -93,7 +93,7 @@ if [[ ! -z $job_number ]];then
     # EOF
     
     # scp *.csv *.txt *.html $HOME/pw/jobs:$job_dir/results && ./clean.sh
-    scp ${remote_node}:*.csv ${remote_node}:*.txt ${remote_node}:*.html ${PWD}/results && ssh ${remote_node} ./clean.sh
+    scp ${remote_node}:*.csv ${remote_node}:*.txt ${remote_node}:*.html ${PWD}/results && ssh ${remote_node} intel-benchmarks/clean.sh
     # scp remote_username@remote_host:/remote/file.txt local_directory/
     
 fi
