@@ -11,7 +11,7 @@ export remote_node=${resource_1_publicIp}
 
 # get the correct repo & paths
 export code_repo=https://github.com/parallelworks/intel-benchmarks
-export abs_path_to_code_repo="/home/${PW_USER}/pw/workflows/$(basename $code_repo)"
+export abs_path_to_code_repo="/home/${PW_USER}/$(basename $code_repo)"
 echo "export job_number=${job_number}" >> inputs.sh
 
 # export the users env file
