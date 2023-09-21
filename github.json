@@ -1,6 +1,6 @@
 {
     "repo": "https://github.com/parallelworks/intel-benchmarks.git",
-    "branch": "main",
+    "branch": "migrate_repo_paths",
     "xml": "workflow.xml",
     "thumbnail": "thumbnail.png",
     "readme": "README.md",
