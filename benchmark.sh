@@ -84,7 +84,7 @@ if [[ ! -z $job_number ]];then
     echo JOBDIR: ${PWD}
     mkdir ${PWD}/results
     
-cat << EOF > service.html
+cat << EOF > result.html
      <body style="background:white;">
      <iframe style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/alltoall.html"></iframe>
      <iframe style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/pingpong.html"></iframe>
@@ -97,7 +97,7 @@ sed -i "s|__PATH__|/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/|g"  service.j
     # scp *.csv *.txt *.html $HOME/pw/jobs:$job_dir/results && ./clean.sh
 
     scp ${PW_USER}@${remote_node}:*.csv ${PW_USER}@${remote_node}:*.txt ${PW_USER}@${remote_node}:*.html ${PWD}/results
-    scp ${PW_USER}@${remote_node}:service.json ${PW_USER}@${remote_node}:service.html ${PWD}
+    scp ${PW_USER}@${remote_node}:service.json ${PW_USER}@${remote_node}:result.html ${PWD}
     ./clean.sh
 
     # scp remote_username@remote_host:/remote/file.txt local_directory/
