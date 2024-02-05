@@ -84,15 +84,22 @@ if [[ ! -z $job_number ]];then
     echo JOBDIR: ${PWD}
     mkdir ${PWD}/results
     
-cat << EOF > service.html
+cat << EOF > result.html
      <body style="background:white;">
-     <img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/alltoall.html">
-     <img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/pingpong.html">
+     <iframe style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/alltoall.html"></iframe>
+     <iframe style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/pingpong.html"></iframe>
      </body>
 EOF
     
+cp service.json.template service.json
+sed -i "s|__PATH__|/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/|g"  service.json
+
     # scp *.csv *.txt *.html $HOME/pw/jobs:$job_dir/results && ./clean.sh
-    scp ${PW_USER}@${remote_node}:*.csv ${PW_USER}@${remote_node}:*.txt ${PW_USER}@${remote_node}:*.html ${PWD}/results && ./clean.sh
+
+    scp ${PW_USER}@${remote_node}:*.csv ${PW_USER}@${remote_node}:*.txt ${PW_USER}@${remote_node}:*.html ${PWD}/results
+    scp ${PW_USER}@${remote_node}:service.json ${PW_USER}@${remote_node}:result.html ${PWD}
+    ./clean.sh
+
     # scp remote_username@remote_host:/remote/file.txt local_directory/
     
 fi
