@@ -86,8 +86,8 @@ if [[ ! -z $job_number ]];then
     
 cat << EOF > service.html
      <body style="background:white;">
-     <img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/alltoall.html">
-     <img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/pingpong.html">
+     <iframe style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/alltoall.html"></iframe>
+     <iframe style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/pingpong.html"></iframe>
      </body>
 EOF
     
