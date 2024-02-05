@@ -84,12 +84,12 @@ if [[ ! -z $job_number ]];then
     echo JOBDIR: ${PWD}
     mkdir ${PWD}/results
     
-    #     cat << EOF > service.html
-    # <body style="background:white;">
-    # <img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/alltoall.html">
-    # <img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/pingpong.html">
-    # </body>
-    # EOF
+cat << EOF > service.html
+     <body style="background:white;">
+     <img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/alltoall.html">
+     <img style="width:40%;display:inline-block;position:relative" src="/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/results/pingpong.html">
+     </body>
+EOF
     
     # scp *.csv *.txt *.html $HOME/pw/jobs:$job_dir/results && ./clean.sh
     scp ${PW_USER}@${remote_node}:*.csv ${PW_USER}@${remote_node}:*.txt ${PW_USER}@${remote_node}:*.html ${PWD}/results && ./clean.sh
