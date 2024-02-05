@@ -91,8 +91,15 @@ cat << EOF > service.html
      </body>
 EOF
     
+cp service.json.template service.json
+sed -i "s|__PATH__|/me/3001/api/v1/display/$HOME/pw/jobs/$job_dir/|g"  service.json
+
     # scp *.csv *.txt *.html $HOME/pw/jobs:$job_dir/results && ./clean.sh
-    scp ${PW_USER}@${remote_node}:*.csv ${PW_USER}@${remote_node}:*.txt ${PW_USER}@${remote_node}:*.html ${PWD}/results && ./clean.sh
+
+    scp ${PW_USER}@${remote_node}:*.csv ${PW_USER}@${remote_node}:*.txt ${PW_USER}@${remote_node}:*.html ${PWD}/results
+    scp ${PW_USER}@${remote_node}:service.json ${PW_USER}@${remote_node}:service.html ${PWD}
+    ./clean.sh
+
     # scp remote_username@remote_host:/remote/file.txt local_directory/
     
 fi
